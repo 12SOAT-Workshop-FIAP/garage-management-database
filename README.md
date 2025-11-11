@@ -8,13 +8,6 @@ A arquitetura deste repositório é baseada na leitura de um estado remoto (`ter
 
 O `main.tf` deste projeto lê o arquivo de estado `garage-management-infra/terraform.tfstate` para obter os IDs da rede e, em seguida, provisiona a instância do RDS dentro dessa rede segura.
 
-```mermaid
-graph TD
-    Infra[garage-management-infra] -- gera outputs --> Estado[S3: ...infra/terraform.tfstate]
-    Estado -- lido por (terraform_remote_state) --> DBRepo[garage-management-database]
-    DBRepo -- provisiona --> RDS[AWS RDS (PostgreSQL)]
-```
-
 O provisionamento deve **obrigatoriamente** seguir esta ordem:
 
 1.  Aplicar o repositório `garage-management-infra`.
