@@ -23,6 +23,6 @@ resource "aws_db_instance" "main" {
   vpc_security_group_ids = [var.rds_sg_id]
 
   # --- Configurações para ambiente de lab ---
-  skip_final_snapshot = true  # Facilita a destruição do ambiente
-  publicly_accessible = false # Garante que o DB não seja acessível pela internet
+  skip_final_snapshot = true
+  publicly_accessible = true
 }
