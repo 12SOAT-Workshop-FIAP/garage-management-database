@@ -4,7 +4,7 @@ Este diretório contém todo o código de Infraestrutura como Código (IaC) para
 
 ## 🏛️ Arquitetura e Dependências
 
-A arquitetura deste repositório é baseada na leitura de um estado remoto (`terraform_remote_state`). Ele depende fundamentalmente dos recursos de rede (VPC, Subnets Privadas e Security Groups) criados pelo repositório `garage-management-infra`.
+A arquitetura deste repositório é baseada na leitura de um estado remoto (`terraform_remote_state`). Ele depende fundamentalmente dos recursos de rede (VPC, Subnets Privadas e Security Groups) criados pelo repositório `garage-management-infra` ([garage-management-infra](https://github.com/12SOAT-Workshop-FIAP/garage-management-infra)).
 
 O `main.tf` deste projeto lê o arquivo de estado `garage-management-infra/terraform.tfstate` para obter os IDs da rede e, em seguida, provisiona a instância do RDS dentro dessa rede segura.
 
@@ -33,6 +33,25 @@ Para facilitar a execução de migrações iniciais, as seguintes configuraçõe
 
 ### Passos para Execução
 
+#### Deploy Automatizado (CI/CD via GitHub Actions)
+Esta é a forma recomendada para a branch main.
+
+1.  **Configure os Secrets no GitHub:**
+
+    Vá em Settings > Secrets and variables > Actions e adicione:
+
+    - AWS_ACCESS_KEY_ID: Sua Access Key.
+    - AWS_SECRET_ACCESS_KEY: Sua Secret Key.
+    - AWS_SESSION_TOKEN: Se usar credenciais temporárias.
+    - DB_USERNAME: O usuário master do banco (ex: postgres).
+    - DB_PASSWORD: A senha master do banco (use uma senha forte).
+
+2.  **Disparar o Deploy:**
+
+    - Faça um push na branch main contendo alterações na pasta garage-management-database.
+    - O workflow iniciará automaticamente o terraform plan e, se bem-sucedido, o terraform apply.
+
+#### Execução Manual (Desenvolvimento Local)
 1.  **Crie o arquivo de variáveis:**
     Crie um arquivo chamado `terraform.tfvars` e adicione as credenciais do banco de dados.
 
