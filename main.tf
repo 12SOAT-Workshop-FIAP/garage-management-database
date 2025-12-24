@@ -5,7 +5,7 @@ provider "aws" {
 data "terraform_remote_state" "base" {
   backend = "s3"
   config = {
-    bucket = "garagemanagement-terraform-backend"
+    bucket = "garagemanagement-terraform-backend-1"
     key    = "garage-management-infra/terraform.tfstate"
     region = var.aws_region
   }
@@ -18,6 +18,6 @@ module "rds" {
   db_username  = var.db_username
   db_password  = var.db_password
 
-  private_subnet_ids = data.terraform_remote_state.base.outputs.private_subnet_ids
+  public_subnet_ids = data.terraform_remote_state.base.outputs.public_subnet_ids
   rds_sg_id          = data.terraform_remote_state.base.outputs.rds_security_group_id
 }

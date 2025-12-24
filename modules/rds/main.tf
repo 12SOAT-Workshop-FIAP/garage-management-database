@@ -1,7 +1,7 @@
 # Grupo de subnets para o RDS saber onde operar
 resource "aws_db_subnet_group" "main" {
   name       = "${var.project_name}-subnet-group"
-  subnet_ids = var.private_subnet_ids # Coloca o DB nas subnets privadas por segurança
+  subnet_ids = var.public_subnet_ids # Coloca o DB nas subnets publicas para acesso local e migrations (mudar para privada em prod)
 
   tags = {
     Name = "${var.project_name}-subnet-group"
