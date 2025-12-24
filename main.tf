@@ -6,7 +6,7 @@ data "terraform_remote_state" "base" {
   backend = "s3"
   config = {
     bucket = "garagemanagement-terraform-backend"
-    key    = "garage-management-app/terraform.tfstate"
+    key    = "garage-management-infra/terraform.tfstate"
     region = var.aws_region
   }
 }
