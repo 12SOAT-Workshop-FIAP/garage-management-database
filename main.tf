@@ -19,5 +19,5 @@ module "rds" {
   db_password  = var.db_password
 
   public_subnet_ids = data.terraform_remote_state.base.outputs.public_subnet_ids
-  rds_sg_id          = data.terraform_remote_state.base.outputs.rds_security_group_id
+  rds_sg_id         = data.terraform_remote_state.base.outputs.rds_security_group_id
 }
