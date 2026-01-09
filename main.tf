@@ -5,7 +5,7 @@ provider "aws" {
 data "terraform_remote_state" "base" {
   backend = "s3"
   config = {
-    bucket = "garagemanagement-terraform-backend-2"
+    bucket = "garagemanagement-terraform-backend-3"
     key    = "garage-management-infra/terraform.tfstate"
     region = var.aws_region
   }
